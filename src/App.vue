@@ -1,20 +1,31 @@
 <template lang="">
     <div class="container">
-        <form>
+        <form @submit.prevent>
             <h4>Create Post</h4>
-            <input class="form-control mt-2" type="text" placeholder="name">
-            <input class="form-control mt-2" type="text" placeholder="description">
+            <input 
+            :value="title" 
+            @input="title = $event.target.value"
+            class="form-control mt-2" 
+            type="text" 
+            placeholder="name"
+            >
+            <input  
+            :value="body" 
+            @input="body = $event.target.value"
+            class="form-control mt-2" 
+            type="text" 
+            placeholder="description"
+            >
+
             <div class="d-flex flex-row-reverse bd-highlight">
-                <button class="btn btn-primary mt-2">Create</button>
+                <button @click="createPost" class="btn btn-primary mt-3">Create</button>
               </div>
         </form>
         <div class="card mt-3" v-for="post in posts" >
             <div class="card-body">
-              <h6 class="card-subtitle text-muted">Name:</h6>
               <h5 class="card-title mb-2">{{ post.title }}</h5>
-              <h6 class="card-subtitle text-muted">Description:</h6>
-              <h5 class="card-title mb-2">{{ post.body }}</h5>
-              <p class="card-text">Some quick example text .</p>
+              <h6 class="card-title mb-2">{{ post.body }}</h6>
+              <p class="card-text text-muted">Some quick example text .</p>
              
             </div>
           </div>
@@ -31,16 +42,23 @@ export default {
                 {id: 2, title: 'JavaScript', body: 'Description #2'},
                 {id: 3, title: 'JavaScript', body: 'Description #3'},
                 {id: 4, title: 'JavaScript', body: 'Description #4'},
-            ]
+            ],
+            title: '',
+            body: ''
         }
     },
     methods: {
-        addLike(){
-            this.likes += 1
-        },
-        addDislike() {
-            this.dislikes += 1
+        createPost() {
+            const newPost = {
+                id: Date.now(),
+                title: this.title,
+                body: this.body,
+            }
+            this.posts.push(newPost)
+            this.title = ''
+            this.body = ''
         }
+       
     }
 }
 </script>
