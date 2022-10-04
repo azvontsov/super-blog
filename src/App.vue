@@ -10,9 +10,13 @@
         <ModalWindow v-model:show="dialogVisible">
             <PostForm @create="createPost"/>
         </ModalWindow> 
-
+        <MySelect
+        v-model="selectedSort"
+        :options="sortOptions"
+        />
+<hr class="mt-5">
        <PostList 
-       :posts="posts"
+       :posts="sortedPosts"
        @remove="removePost"
        v-if="!isPostLoading"
        />
@@ -25,6 +29,7 @@ import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
 import ModalWindow from '@/components/ModalWindow.vue'
 import axios from 'axios'
+import MySelect from './components/MySelect.vue'
 
 
 export default {
@@ -32,7 +37,12 @@ export default {
         return {
             posts: [],
             dialogVisible: false,
-            isPostLoading: false
+            isPostLoading: false,
+            selectedSort: '',
+            sortOptions: [
+                {value: 'title', name: 'by name'},
+                {value: 'body', name: 'by description'},
+            ]
         }
     },
     methods: {
@@ -57,17 +67,23 @@ export default {
                 console.log('error:', e)
             }
         }
-       
     },
     mounted() {
         this.fetchPosts()
     },
-    components: {
-        PostForm,
-        PostList,
-        ModalWindow
+   
+    computed: {
+        sortedPosts() {
+            return [...this.posts].sort((post1, post2)=> post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+            }
+        },
 
-    }
+    components: {
+    PostForm,
+    PostList,
+    ModalWindow,
+    MySelect
+}
 }
 </script>
 <style lang="css">
