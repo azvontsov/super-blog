@@ -3,7 +3,7 @@
         <div class="card-body">
           <h5 class="card-title mb-2">{{ post.title }}</h5>
           <h6 class="card-title mb-2">{{ post.body }}</h6>
-          <p class="card-text text-muted">Some quick example text .</p>
+          <!-- <p class="card-text text-muted">Some quick example text .</p> -->
         </div>
         <div class="d-flex flex-row-reverse bd-highlight">
             <button 

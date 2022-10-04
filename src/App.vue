@@ -14,8 +14,9 @@
        <PostList 
        :posts="posts"
        @remove="removePost"
+       v-if="!isPostLoading"
        />
-       
+       <div class="mt-5" v-else>Loading...</div>
     </div>
    
 </template>
@@ -23,18 +24,15 @@
 import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
 import ModalWindow from '@/components/ModalWindow.vue'
+import axios from 'axios'
 
 
 export default {
     data() {
         return {
-            posts: [
-                {id: 1, title: 'JavaScript', body: 'Description'},
-                {id: 2, title: 'JavaScript', body: 'Description #2'},
-                {id: 3, title: 'JavaScript', body: 'Description #3'},
-                {id: 4, title: 'JavaScript', body: 'Description #4'},
-            ],
-            dialogVisible: false
+            posts: [],
+            dialogVisible: false,
+            isPostLoading: false
         }
     },
     methods: {
@@ -47,8 +45,22 @@ export default {
         },
         showDialog() {
             this.dialogVisible = true
+        },
+        async fetchPosts() {
+            try {
+                this.isPostLoading = true
+                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+                    this.posts = response.data
+                    this.isPostLoading = false
+                
+            } catch (e) {
+                console.log('error:', e)
+            }
         }
        
+    },
+    mounted() {
+        this.fetchPosts()
     },
     components: {
         PostForm,

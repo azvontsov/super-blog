@@ -8,7 +8,7 @@
         @remove="$emit('remove', post)"
         />
     </div>
-    <h2 v-else>No posts here yet</h2>
+    <h4 class="mt-5" v-else>No posts here yet.</h4>
 
 </template>
 
