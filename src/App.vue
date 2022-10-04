@@ -3,6 +3,10 @@
 
     <div class="container">
         <h1>Posts Window</h1>
+        <div class="input-group mb-3">
+            <input v-model="searchQuery" type="text" class="form-control" placeholder="Search Post..." aria-label="Search Post" aria-describedby="button-addon2">
+
+          </div>
         <button 
         class="btn btn-primary"
         @click="showDialog"
@@ -16,7 +20,7 @@
         />
 <hr class="mt-5">
        <PostList 
-       :posts="sortedPosts"
+       :posts="sortedAndSearchedPosts"
        @remove="removePost"
        v-if="!isPostLoading"
        />
@@ -39,6 +43,7 @@ export default {
             dialogVisible: false,
             isPostLoading: false,
             selectedSort: '',
+            searchQuery: '',
             sortOptions: [
                 {value: 'title', name: 'by name'},
                 {value: 'body', name: 'by description'},
@@ -75,8 +80,12 @@ export default {
     computed: {
         sortedPosts() {
             return [...this.posts].sort((post1, post2)=> post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
-            }
         },
+        sortedAndSearchedPosts() {
+            return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        }
+            
+    },
 
     components: {
     PostForm,
