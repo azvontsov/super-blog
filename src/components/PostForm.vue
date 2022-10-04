@@ -16,7 +16,7 @@
 
         <div class="d-flex flex-row-reverse bd-highlight">
             <button @click="createPost" class="btn btn-primary mt-3">Create</button>
-          </div>
+        </div>
     </form>
 </template>
 <script>
