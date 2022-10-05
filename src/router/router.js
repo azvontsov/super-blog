@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createMemoryHistory } from "vue-router";
 import MainPage from "@/pages/MainPage.vue";
 import PostPage from "@/pages/PostPage.vue";
 import ContactPage from "@/pages/ContactPage.vue";
@@ -19,7 +19,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+  history: createMemoryHistory(process.env.BASE_URL),
   routes,
 });
 
