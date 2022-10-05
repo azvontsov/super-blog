@@ -1,6 +1,6 @@
 <template lang="">
-    <div class="mt-5" v-if="posts.length > 0">
-        <h3>Posts list</h3>
+    <div class=" mt-5" v-if="posts.length > 0">
+        <h3 class="text-white">Posts list</h3>
         <TransitionGroup name="list">
             <PostItem 
             v-for="post in posts"

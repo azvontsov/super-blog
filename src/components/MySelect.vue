@@ -1,4 +1,7 @@
 <template lang="">
+    <div class="container">
+
+    
     <div class="d-flex flex-row-reverse bd-highlight">
         <select v-model="modelValue" @change="changeOption">
             <option disabled value="">Pick from the list</option>
@@ -9,8 +12,8 @@
             
             >{{ option.name }}</option>
         </select>
-
     </div>
+</div>
 </template>
 <script>
 export default {

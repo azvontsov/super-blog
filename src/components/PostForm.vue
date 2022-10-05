@@ -1,4 +1,6 @@
 <template lang="">
+    <div class="container">
+
     <form @submit.prevent>
         <h4>Create Post</h4>
         <input 
@@ -18,6 +20,7 @@
             <button @click="createPost" class="btn btn-primary mt-3">Create</button>
         </div>
     </form>
+</div>
 </template>
 <script>
 export default {

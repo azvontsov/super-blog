@@ -1,8 +1,8 @@
 <template lang="">
-    <div class="dialog" v-if="show" @click.stop="hideDialog">
+    <div class="dialog " v-if="show" @click.stop="hideDialog">
         <div>
-            <div @click.stop class="card shadow-lg position-absolute top-50 start-50 translate-middle" style="width: 28rem;">
-                <div class="card-body">
+            <div @click.stop class="card shadow-lg position-absolute top-50 start-50 translate-middle shadow" style="width: 38rem;">
+                <div class="card-body ">
                     <slot></slot>
                 </div>
             </div>
@@ -40,7 +40,7 @@ export default {
         z-index: 2;
     }
     .card {
-        background: rgb(226, 226, 178);
+
 
         z-index: 3;
     }
